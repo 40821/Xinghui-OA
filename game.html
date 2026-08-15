@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>星辉办公系统 v2.0</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<!-- 引导遮罩 -->
+<div class="guide-overlay" id="guideOverlay"></div>
+
+<div class="browser-frame" id="browserFrame">
+  <!-- 标题栏 -->
+  <div class="title-bar">
+    <div class="dots">
+      <button class="dot red reset-game" type="button" onclick="confirmResetGame()" aria-label="重新开始游戏" title="重新开始">×</button>
+      <div class="dot yellow"></div>
+      <div class="dot green"></div>
+    </div>
+    <div class="title" id="windowTitle">星辉办公系统 v2.0 - 我的工作台</div>
+  </div>
+
+  <!-- 地址栏 -->
+  <div class="address-bar">
+    <input type="text" value="http://intranet.xinghui大厦.com/workbench" readonly id="addressBar">
+  </div>
+
+  <!-- 入侵警告条 -->
+  <div class="invasion-banner" id="invasionBanner">
+    ⚠ 未知用户正在入侵您的设备！倒计时 <span id="invasionTimer">30</span> 秒 ⚠
+    <button onclick="showPasswordModal('firewall')" style="margin-left:16px;padding:4px 14px;background:#fff;color:#e74c3c;border:none;border-radius:4px;cursor:pointer;font-weight:bold;font-size:12px">立即阻断</button>
+  </div>
+
+  <!-- 主体 -->
+  <div class="browser-body">
+    <!-- 侧边导航 -->
+    <div class="sidebar">
+      <div class="sidebar-header">系统导航</div>
+      <div class="nav-item active" data-page="workbench" onclick="navigate('workbench')">
+        <span class="icon">📝</span> 我的工作台
+      </div>
+      <div class="nav-item" data-page="email" onclick="navigate('email')">
+        <span class="icon">📧</span> 公司邮箱
+        <span class="badge" id="emailBadge">1</span>
+      </div>
+      <div class="nav-item" data-page="docs" onclick="navigate('docs')">
+        <span class="icon">📁</span> 文档中心
+      </div>
+      <div class="nav-item" data-page="access" onclick="navigate('access')">
+        <span class="icon">🚪</span> 门禁与电梯
+      </div>
+      <div class="nav-item" data-page="announcements" onclick="navigate('announcements')">
+        <span class="icon">📢</span> 物业公告
+      </div>
+      <div class="nav-item locked" data-page="monitor" id="navMonitor" onclick="navigate('monitor')">
+        <span class="icon">📹</span> 监控系统 🔒
+      </div>
+      <div class="nav-item locked" data-page="archive" id="navArchive" onclick="navigate('archive')">
+        <span class="icon">📜</span> 历史档案库 🔒
+      </div>
+      <div class="nav-item locked" data-page="fire" id="navFire" onclick="navigate('fire')">
+        <span class="icon">🧯</span> 消防联动 🔒
+      </div>
+      <div class="nav-item locked" data-page="oldsite" id="navOldsite" onclick="navigate('oldsite')">
+        <span class="icon">💾</span> 8楼旧站点 🔒
+      </div>
+      <div class="nav-item" data-page="treehole" onclick="navigate('treehole')" style="display:none" id="navTreehole">
+        <span class="icon">🌳</span> 员工树洞
+      </div>
+    </div>
+
+    <!-- 主内容区 -->
+    <div class="main-content" id="mainContent">
+
+      <!-- 工作台 -->
+      <div class="page active" id="page-workbench">
+        <h2>我的工作台 - 创意部</h2>
+        <div class="workbench-editor">
+          <div class="workbench-toolbar">
+            <div>
+              <div class="doc-title">星辉大厦火灾事件背景介绍稿.docx</div>
+              <div class="doc-subtitle">游客导览 · 创意部 0701 · 林默</div>
+            </div>
+            <div class="workbench-actions">
+              <span>23:47</span>
+              <span>编辑中</span>
+            </div>
+          </div>
+          <div class="workbench-ribbon">
+            <button>B</button>
+            <button>I</button>
+            <button>标题</button>
+            <button>批注</button>
+            <button>分享</button>
+          </div>
+          <div class="doc-body" id="workbenchText">
+            一、事件概述
+            2004年7月12日深夜，星辉大厦8楼鼎盛贸易公司办公区突发大火。火势沿走廊迅速蔓延，浓烟封锁楼梯间，多名深夜加班人员被困。官方通报将起火原因归为配电室电路老化，但后续内部资料显示，真实起火点位于8楼办公室内部。
+
+            二、关键人物
+            陈国华：星辉大厦夜班保安。火灾发生时本已撤离，但在发现仍有人员被困后折返上楼搜救，最终牺牲于8楼楼梯间。
+
+
+            三、游客导览说明
+            希望让来访者理解：一场火灾背后，往往同时存在管理疏漏、情绪失控、信息隐瞒与个体选择。请在参观过程中留意档案、公告、监控记录与保安值班日志，它们共同构成了星辉大厦至今仍被反复提起的那一夜。
+
+            四、安全提示
+            如遇火警，请优先远离浓烟区域，沿安全指示撤离；不要乘坐电梯，不要返回火场取物。记住每一次演练和每一道消防门，都是为了让真正的夜晚不再重演。
+
+            <span class="cursor-blink"></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 邮箱 -->
+      <div class="page" id="page-email">
+        <h2>公司邮箱 - 林默</h2>
+        <div id="emailListView">
+          <ul class="email-list" id="emailList"></ul>
+        </div>
+        <div class="email-detail" id="emailDetailView">
+          <div class="back-btn" onclick="showEmailList()">← 返回收件箱</div>
+          <div class="email-meta" id="emailMeta"></div>
+          <div class="email-body" id="emailBody"></div>
+        </div>
+      </div>
+
+      <!-- 文档中心 -->
+      <div class="page" id="page-docs">
+        <h2>文档中心</h2>
+        <div class="doc-grid" id="docGrid"></div>
+      </div>
+      <div class="doc-viewer" id="docViewer">
+        <div class="back-btn" onclick="closeDocViewer()">← 返回文档列表</div>
+        <div class="viewer-title" id="viewerTitle"></div>
+        <div class="viewer-content" id="viewerContent"></div>
+      </div>
+
+      <!-- 门禁 -->
+      <div class="page" id="page-access">
+        <h2>门禁与电梯调度</h2>
+        <div class="access-panel">
+          <div class="access-card">
+            <img class="access-visual" id="gateImage" src="access_gate_normal.png" alt="一楼大门状态">
+            <div class="ac-title">一楼大门</div>
+            <span class="status normal" id="gateStatus">正常运行</span>
+          </div>
+          <div class="access-card">
+            <img class="access-visual" id="elevatorImage" src="access_elevator_normal.png" alt="电梯系统状态">
+            <div class="ac-title">电梯系统（共4部）</div>
+            <span class="status normal" id="elevatorStatus">正常运行</span>
+          </div>
+          <div class="access-card">
+            <img class="access-visual" id="fireDoorImage" src="access_firedoor_locked.png" alt="7楼消防通道状态">
+            <div class="ac-title">7楼消防通道</div>
+            <span class="status locked" id="fireDoorStatus">电子锁死</span>
+            <div style="margin-top:12px">
+              <button class="unlock-btn" id="fireDoorBtn" onclick="showPasswordModal('fireDoor')">输入密码解锁</button>
+            </div>
+          </div>
+          <div class="access-card" id="contactUnlockCard">
+            <div class="ac-title">内部通讯录</div>
+            <span class="status locked">权限锁定</span>
+            <div style="margin-top:12px">
+              <button class="unlock-btn" id="contactBtn" onclick="showPasswordModal('contact')">输入部门编号</button>
+            </div>
+          </div>
+          <div class="access-card" id="contactCard" style="display:none">
+            <div class="ac-title">内部通讯录</div>
+            <div style="font-size:13px;color:#666;margin-top:8px">
+              物业值班电话：拨打中...<br>
+              <span style="color:#999;font-size:12px">语音提示：您拨打的号码不在服务区</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 公告 -->
+      <div class="page" id="page-announcements">
+        <h2>物业公告栏</h2>
+        <ul class="announcement-list" id="announcementList"></ul>
+      </div>
+
+      <!-- 监控 -->
+      <div class="page" id="page-monitor">
+        <h2>监控系统 - 楼道监控</h2>
+        <div class="monitor-grid" id="monitorGrid"></div>
+        <div style="margin-top:16px;font-size:12px;color:#999;text-align:center">
+          提示：点击监控画面可查看详情。8楼画面信号异常。
+        </div>
+      </div>
+
+      <!-- 档案库 -->
+      <div class="page" id="page-archive">
+        <h2>历史档案库 - 3楼档案室数字存档</h2>
+        <div id="archiveList"></div>
+      </div>
+
+      <!-- 消防 -->
+      <div class="page" id="page-fire">
+        <h2>消防联动系统</h2>
+        <div class="fire-panel">
+          <div class="fire-icon">🧯</div>
+          <div class="fire-status ok" id="fireStatus">全楼消防系统正常待命</div>
+          <div style="font-size:13px;color:#666;margin-bottom:16px">
+            启动全楼自动喷淋与灭火程序需要保安最高权限码
+          </div>
+          <button class="control-btn primary" id="fireActivateBtn" onclick="showPasswordModal('fireSystem')">
+            启动8楼灭火程序
+          </button>
+          <div style="margin-top:20px;font-size:12px;color:#999">
+            权限码格式：火警电话 + 值班组编号
+          </div>
+        </div>
+      </div>
+
+      <!-- 8楼旧站点 -->
+      <div class="page" id="page-oldsite">
+        <h2>8楼 - 鼎盛贸易公司旧站点 (v1.0)</h2>
+        <div style="margin-bottom:12px;padding:10px;background:#fff3cd;border-radius:4px;font-size:12px;color:#856404;display:flex;align-items:center;gap:12px">
+          <span>⚠ 此站点为危险区域，残影活跃度极高。如无法处理，可选择：</span>
+          <button onclick="forceDisconnect()" style="padding:4px 12px;background:#e74c3c;color:#fff;border:none;border-radius:4px;cursor:pointer;font-size:12px">强制断开内网（放弃解谜）</button>
+        </div>
+        <div class="oldsite-frame">
+          <div class="oldsite-header">鼎盛贸易有限公司 - 内部办公系统</div>
+          <div class="oldsite-nav">
+            <button class="active" onclick="switchOldsiteTab(this,'mail')">员工邮箱</button>
+            <button onclick="switchOldsiteTab(this,'docs')">部门文档</button>
+            <button onclick="switchOldsiteTab(this,'personal')">个人文件夹</button>
+            <button onclick="switchOldsiteTab(this,'bbs')">内部BBS</button>
+          </div>
+          <div class="oldsite-content" id="oldsiteContent"></div>
+        </div>
+      </div>
+
+      <!-- 树洞 -->
+      <div class="page" id="page-treehole">
+        <h2>员工匿名树洞</h2>
+        <div class="treehole-board">
+          <div class="treehole-board-head">
+            <div>
+              <div class="treehole-board-title">内部匿名交流记录</div>
+              <div class="treehole-board-subtitle">员工可留下不署名的工作与夜间见闻</div>
+            </div>
+            <span class="treehole-board-status">只读备份</span>
+          </div>
+          <div id="treeholeList" class="treehole-list"></div>
+        </div>
+      </div>
+
+      <!-- 特效层 -->
+      <div class="scanlines" id="scanlines"></div>
+      <div class="burn-edges" id="burnEdges"></div>
+      <div class="fire-overlay" id="fireOverlay"></div>
+
+      <!-- Toast容器 -->
+      <div class="toast-container" id="toastContainer"></div>
+    </div>
+  </div>
+
+  <!-- 状态栏 -->
+  <div class="status-bar">
+    <span>用户：林默（创意部）</span>
+    <span class="clock" id="clock">23:47:00</span>
+    <span class="system-status" id="systemStatus">系统正常</span>
+  </div>
+</div>
+
+<!-- 密码弹窗 -->
+<div class="modal-overlay" id="passwordModal">
+  <div class="modal-box">
+    <h3 id="modalTitle">请输入密码</h3>
+    <p id="modalHint">请输入4位数字密码</p>
+    <input type="password" id="passwordInput" maxlength="4" placeholder="----">
+    <div class="modal-btns">
+      <button class="btn-cancel" onclick="closePasswordModal()">取消</button>
+      <button class="btn-confirm" onclick="submitPassword()">确认</button>
+    </div>
+  </div>
+</div>
+
+<!-- 确认弹窗 -->
+<div class="modal-overlay" id="confirmModal">
+  <div class="modal-box">
+    <h3 id="confirmTitle">确认操作</h3>
+    <p id="confirmText">确定继续吗？</p>
+    <div class="modal-btns">
+      <button class="btn-cancel" onclick="closeConfirmModal()">取消</button>
+      <button class="btn-confirm" onclick="submitConfirmModal()">确认</button>
+    </div>
+  </div>
+</div>
+
+<!-- 监控放大弹窗 -->
+<div class="modal-overlay" id="monitorModal">
+  <div class="monitor-modal-box">
+    <div class="monitor-modal-head">
+      <div>
+        <div class="monitor-modal-title" id="monitorModalTitle">监控详情</div>
+        <div class="monitor-modal-subtitle" id="monitorModalSubtitle">实时画面</div>
+      </div>
+      <button class="monitor-close" onclick="closeMonitorModal()">关闭</button>
+    </div>
+    <div class="monitor-modal-frame">
+      <img id="monitorModalImage" src="" alt="监控放大画面">
+      <div class="monitor-modal-scan"></div>
+    </div>
+  </div>
+</div>
+
+<!-- 结局画面 -->
+<div class="ending-screen" id="endingScreen">
+  <div class="badge-img" id="endingIcon"></div>
+  <h1 id="endingTitle"></h1>
+  <div class="ending-text" id="endingText"></div>
+  <button class="restart-btn" onclick="restartGame()">重新开始</button>
+</div>
+<script src="game.js"></script>
+</body>
+</html>
